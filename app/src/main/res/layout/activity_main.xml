@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true" android:fitsSystemWindows="true" android:background="#0A1021">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+     android:orientation="vertical" android:padding="18dp">
+  <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:text="AUTOTRADER  /  V9" android:textSize="12sp" android:letterSpacing="0.2"
+      android:textColor="#57CDBA" android:textStyle="bold"/>
+  <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:layout_marginTop="5dp" android:text="Market intelligence" android:textColor="#F5F8FF"
+      android:textSize="28sp" android:textStyle="bold" />
+  <TextView android:id="@+id/banner" android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:layout_marginTop="6dp" android:text="OFFLINE  ·  Monitor-only" android:textColor="#E5B969"
+      android:textSize="13sp" />
+  <Button android:id="@+id/scanLive" android:layout_width="match_parent" android:layout_height="54dp"
+      android:layout_marginTop="16dp" android:background="@drawable/button_fill"
+      android:text="Scan live markets (no account needed)" android:textColor="#081721"
+      android:textStyle="bold" android:textAllCaps="false" />
+  <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:layout_marginTop="8dp" android:text="Standalone scanner: Binance · Kraken · Coinbase public data" 
+      android:textColor="#91A3BC" android:textSize="12sp" />
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:orientation="vertical" android:padding="14dp" android:background="@drawable/panel"
+      android:layout_marginTop="12dp">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="OPTIONAL · CONNECT EXISTING V7 BACKEND" android:textSize="11sp" android:textColor="#8295B5" android:letterSpacing="0.1" />
+    <EditText android:id="@+id/serverUrl" android:layout_width="match_parent" android:layout_height="48dp"
+        android:layout_marginTop="9dp" android:paddingHorizontal="12dp"
+        android:singleLine="true" android:background="@drawable/input"
+        android:inputType="textUri" android:textSize="14sp" android:textColor="#FFFFFF"
+        android:hint="https://your-server.example" android:textColorHint="#7588A3" />
+    <EditText android:id="@+id/controllerToken" android:layout_width="match_parent" android:layout_height="48dp"
+        android:layout_marginTop="8dp" android:paddingHorizontal="12dp"
+        android:singleLine="true" android:background="@drawable/input"
+        android:inputType="textPassword" android:textSize="14sp" android:textColor="#FFFFFF"
+        android:hint="Controller status token (if needed)" android:textColorHint="#7588A3" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:layout_marginTop="10dp">
+      <Button android:id="@+id/connect" android:layout_width="0dp" android:layout_weight="1" android:layout_height="48dp"
+          android:background="@drawable/button_fill" android:text="Connect backend" android:textColor="#081721"
+          android:textAllCaps="false" />
+      <Button android:id="@+id/demo" android:layout_width="0dp" android:layout_weight="1"
+          android:layout_height="48dp" android:layout_marginStart="8dp"
+          android:background="@drawable/button_ghost" android:text="Demo" android:textColor="#D8E7FF"
+          android:textAllCaps="false" />
+    </LinearLayout>
+  </LinearLayout>
+  <TextView android:id="@+id/alert" android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:layout_marginTop="12dp" android:textColor="#F1BD83" android:textSize="12sp"
+      android:text="Signals are estimates, not guaranteed returns. No orders can be placed from this app."/>
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:layout_marginTop="14dp" android:orientation="horizontal">
+    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="14dp" android:background="@drawable/panel">
+      <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+          android:text="LIVE MARKETS / QUOTES" android:textColor="#91A3BC" android:textSize="10sp"/>
+      <TextView android:id="@+id/quotes" android:layout_width="match_parent" android:layout_height="wrap_content"
+          android:layout_marginTop="6dp" android:text="—" android:textColor="#F5F8FF" android:textSize="22sp" android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="14dp" android:background="@drawable/panel"
+        android:layout_marginStart="10dp">
+      <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+          android:text="MODEL QUALITY / p99" android:textColor="#91A3BC" android:textSize="10sp"/>
+      <TextView android:id="@+id/latency" android:layout_width="match_parent" android:layout_height="wrap_content"
+          android:layout_marginTop="6dp" android:text="—" android:textColor="#F5F8FF" android:textSize="22sp" android:textStyle="bold" />
+    </LinearLayout>
+  </LinearLayout>
+  <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:layout_marginTop="22dp" android:text="Ranked market signals" android:textColor="#F5F8FF"
+      android:textSize="20sp" android:textStyle="bold" />
+  <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:text="Ranked watchlist · indicative costs · not trade orders" android:textColor="#91A3BC"
+      android:textSize="12sp" android:layout_marginTop="4dp" />
+  <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:fillViewport="true" android:scrollbars="none" android:layout_marginTop="12dp">
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:orientation="horizontal">
+      <Button android:id="@+id/filterAll" android:layout_width="82dp" android:layout_height="43dp"
+          android:text="All" android:background="@drawable/button_fill" android:textAllCaps="false" android:textColor="#0A1021"/>
+      <Button android:id="@+id/filterUp" android:layout_width="82dp" android:layout_height="43dp"
+          android:layout_marginStart="6dp" android:text="Up" android:background="@drawable/button_ghost" android:textAllCaps="false" android:textColor="#EAF1FF"/>
+      <Button android:id="@+id/filterDown" android:layout_width="82dp" android:layout_height="43dp"
+          android:layout_marginStart="6dp" android:text="Down" android:background="@drawable/button_ghost" android:textAllCaps="false" android:textColor="#EAF1FF"/>
+      <Button android:id="@+id/filterArb" android:layout_width="100dp" android:layout_height="43dp"
+          android:layout_marginStart="6dp" android:text="Spreads" android:background="@drawable/button_ghost" android:textAllCaps="false" android:textColor="#EAF1FF"/>
+    </LinearLayout>
+  </HorizontalScrollView>
+  <LinearLayout android:id="@+id/routes" android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:orientation="vertical" android:layout_marginTop="10dp" />
+  <TextView android:id="@+id/footer" android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:layout_marginTop="18dp" android:textSize="12sp" android:textColor="#8798B2"
+      android:text="HTTPS required · Token stays in RAM · No trading, deposits or withdrawals"/>
+ </LinearLayout>
+</ScrollView>
