@@ -1,0 +1,75 @@
+name: Build AutoTrader V9 Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-apk.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Reconstruct and verify V9 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat src_encoded/part_*.b64 | base64 --decode > /tmp/autotrader-source.zip
+          echo "68eecd86abc21be296b2681fc5131aad162d7a4ce30f9f9f1904ddc4eb366e79  /tmp/autotrader-source.zip" | sha256sum --check
+          mkdir -p /tmp/autotrader-src
+          unzip -q /tmp/autotrader-source.zip -d /tmp/autotrader-src
+          cp -r /tmp/autotrader-src/app .
+          cp /tmp/autotrader-src/build.gradle.kts .
+          cp /tmp/autotrader-src/settings.gradle.kts .
+          cp /tmp/autotrader-src/gradle.properties .
+          test -f app/src/main/java/com/autotrader/mobile/MainActivity.java
+          test -f app/src/main/java/com/autotrader/mobile/MarketScanner.java
+          test -f app/src/main/java/com/autotrader/mobile/ForecastEngine.java
+
+      - name: Configure Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Configure Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK components
+        run: sdkmanager --install 'platforms;android-36' 'build-tools;36.0.0'
+
+      - name: Configure Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.6.1'
+
+      - name: Assemble debug APK
+        run: gradle :app:assembleDebug --no-daemon --stacktrace
+
+      - name: Upload installable APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: AutoTrader-V9-debug-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
+      - name: Commit extracted Android source files
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/src app/build.gradle.kts build.gradle.kts settings.gradle.kts gradle.properties
+          if ! git diff --cached --quiet; then
+            git commit -m "Add extracted AutoTrader V9 Android source"
+            git push origin HEAD:main
+          fi
